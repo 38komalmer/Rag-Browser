@@ -7,13 +7,16 @@ function checkEnter(e) {
     }
 }
 
+//get the stored homepage
+var homePage = localStorage.getItem("homepage");
+//get the currently active frame
 var activeFrame = document.getElementById('frame' + selectedTab);
 
 //the number of tabs ever opened, tab IDs are based off of this
 var numberOfTabs = 1;
 //the number of tabs currently open
 var remainingTabs = 1;
-var tabs = [{tabNumber: 0, iframeNumber: 0, url: "http://www.scanurag.com"}, ]
+var tabs = [{tabNumber: 0, iframeNumber: 0, url: homePage}, ]
 function addTab() {
     //calculate the position of the new tab, each tab is 100px wide with 15px between each tab
     var newTabPosition = remainingTabs * 105 + 10;

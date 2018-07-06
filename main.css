@@ -162,7 +162,7 @@ body{
     top: 50px;
     right: 0px;
     background: grey;
-    width: 100px;
+    width: 250px;
     border-bottom-left-radius: 5px;
     padding: 5px;
     display: none;
@@ -175,7 +175,7 @@ body{
 }
 
 .menuOption {
-    width:100px;
+    width:250px;
     padding: 5px;
     transition-duration: .5;
 }
@@ -188,7 +188,7 @@ body{
     width: 25px;
     height: 25px;
     font-size: 18px;
-    top: 25px;
+    top: 55px;
     background: grey;
     color: white;
 }
