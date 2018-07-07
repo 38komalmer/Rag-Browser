@@ -10,6 +10,7 @@
         <h2>Home Page</h2>
         <input type="text" value="https://scanurag.com" id="homePageInput" onchange="updateHP()">
         <h2>New Tab Page</h2>
+        <h4 style="color: red; display: none;" id="restartRequired"><b>Note:</b> you must restart your browser for these changes to be applied.</h4>
         <input type="radio" name="nt" id="defaultNT" onchange="setNT()"><label>Use the default new tab page</label><br>
 		<input type="radio" name="nt" id="HPNT" onchange="setNT()"><label>Use your home page</label><br>
         <input type="radio" name="nt" id="customNT" onchange="setNT()"><label>Use the following website</label><input type="text" id="customURL" onchange="setNT()">

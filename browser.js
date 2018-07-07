@@ -9,6 +9,8 @@ function checkEnter(e) {
 
 //get the stored homepage
 var homePage = localStorage.getItem("homepage");
+//get the stored new tab page
+var NTpage = localStorage.getItem("ntpage");
 //get the currently active frame
 var activeFrame = document.getElementById('frame' + selectedTab);
 
@@ -42,7 +44,7 @@ function addTab() {
     //re-position the add tab button
     document.getElementById("addTab").style.left = newTabPosition + 105 + "px";
     //Add a new entry to the tabs array
-    tabs.push({tabNumber: numberOfTabs, iframeNumber: numberOfTabs, url: "rag://newtab"})
+    tabs.push({tabNumber: numberOfTabs, iframeNumber: numberOfTabs, url: NTpage})
     //focus the new tab
     focusTab("tab" + numberOfTabs, numberOfTabs);
     //load the home page on the new tab
@@ -132,7 +134,7 @@ function repositionTabs() {
 }
 
 function loadUrl() {
-    document.getElementById("reload-btn").classList.add("spin");
+    //document.getElementById("reload-btn").classList.add("spin");
     var newUrl = document.getElementById("urlSource").value;
     tabs[selectedTab].url = newUrl;
     if (newUrl == "rag://newtab") {
@@ -143,10 +145,9 @@ function loadUrl() {
 }
     
 function Reload () {
-document.getElementById("reload-btn").classList.add("spin");
+//document.getElementById("reload-btn").classList.add("spin");
 var f = document.getElementById('frame' + selectedTab);
 f.src = f.src;
-f.goBack();
 }
 
 function doneLoading() {
@@ -163,4 +164,14 @@ function fullscreenIframe() {
     if (elem.mozRequestFullScreen) {
         elem.mozRequestFullScreen();
     }  
+}
+
+function goBackwards() {
+   var f = document.getElementById('frame' + selectedTab);
+   f.goBack(); 
+}
+
+function goForwards() {
+   var f = document.getElementById('frame' + selectedTab);
+   f.goForward(); 
 }
