@@ -134,7 +134,6 @@ function repositionTabs() {
 }
 
 function loadUrl() {
-    //document.getElementById("reload-btn").classList.add("spin");
     var newUrl = document.getElementById("urlSource").value;
     tabs[selectedTab].url = newUrl;
     if (newUrl == "rag://newtab") {
@@ -145,7 +144,6 @@ function loadUrl() {
 }
     
 function Reload () {
-//document.getElementById("reload-btn").classList.add("spin");
 var f = document.getElementById('frame' + selectedTab);
 f.src = f.src;
 }
@@ -174,4 +172,14 @@ function goBackwards() {
 function goForwards() {
    var f = document.getElementById('frame' + selectedTab);
    f.goForward(); 
+}
+
+function loadstart(){
+    document.getElementById("reload-btn").classList.add("spin");
+}
+
+window.onload = addListeners;
+function addListeners() {
+    document.getElementById('frame' + selectedTab).addEventListener('did-start-loading', loadstart)
+    document.getElementById('frame' + selectedTab).addEventListener('did-stop-loading', doneLoading)
 }
