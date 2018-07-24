@@ -13,6 +13,8 @@ var homePage = localStorage.getItem("homepage");
 var NTpage = localStorage.getItem("ntpage");
 //get the currently active frame
 var activeFrame = document.getElementById('frame' + selectedTab);
+//get the stored bookmarks
+var bookmarks = [{name: "Scanu Productions", url: "https://scanurag.com", id: 0}]
 
 //the number of tabs ever opened, tab IDs are based off of this
 var numberOfTabs = 1;
@@ -182,4 +184,11 @@ window.onload = addListeners;
 function addListeners() {
     document.getElementById('frame' + selectedTab).addEventListener('did-start-loading', loadstart)
     document.getElementById('frame' + selectedTab).addEventListener('did-stop-loading', doneLoading)
+}
+
+var BrowserWindow = require('electron').remote;
+var theWindow = BrowserWindow.getCurrentWindow();
+
+function closeWindow(){
+	theWindow.close();
 }

@@ -5,6 +5,32 @@ body{
     overflow: hidden;
 }
 
+#title-bar {
+	-webkit-app-region: drag;
+	background: #3f3f3f;
+	color: white;
+	height: 20px;
+	padding: 0px;
+	text-align: center;
+	z-index: 99;
+}
+
+#title {
+	margin: 0px;
+	padding: 0px;
+}
+
+.titleButtons{
+	position: fixed;
+	font-weight: bolder;
+	color: white;
+	font-size: 24px;
+	background: rgba(0, 0, 0, 0);
+	border: none;
+	padding-top: 0px;
+	z-index: 100;
+}
+
 #tabContainer {
     position: absolute;
     height: 15px;
@@ -48,7 +74,7 @@ body{
             user-select: none; /* Non-prefixed version, currently
                                   supported by Chrome and Opera */
     cursor: default;
-    height: 50px;
+    height: 70px;
 }
 
 .browserTool {
@@ -56,7 +82,7 @@ body{
     right: 10px;
     background: rgba(0, 0, 0, 0);
     border: none;
-    top: 25px;
+    top: 45px;
     font-weight: bold;
 }
 
@@ -137,12 +163,12 @@ body{
 
 .displayFrame {
     width: 100%;
-    height: calc(100% - 50px);
+    height: calc(100% - 90px);
     display: flex;
     border: none;
     resize: none;
     position: absolute;
-    top: 50px;
+    top: 90px;
     z-index: -100;
     border-bottom-left-radius: 6px;
     border-bottom-right-radius: 6px;
@@ -195,4 +221,10 @@ body{
 
 #closeMenu:hover {
     background: red;
+}
+
+#bookmarksContainer {
+	position: absolute;
+	top: 70px;
+	padding: 2px;
 }
