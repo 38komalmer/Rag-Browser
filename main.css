@@ -228,3 +228,25 @@ body{
 	top: 70px;
 	padding: 2px;
 }
+
+#createBookmark {
+    position: absolute;
+    right: 0px;
+    top: 90px;
+    background: grey;
+    padding: 5px;
+    border-bottom-left-radius: 5px;
+    display: none;
+}
+
+.bookmarkInput {
+    margin: 5px;
+    border: none;
+    padding: 5px;
+}
+
+.bookmarkButton {
+    margin: 5px;
+    border: none;
+    padding: 5px;
+}

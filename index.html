@@ -22,7 +22,7 @@
       <input class="browserTool" type="button" value="&#8594;" onclick="loadUrl()" id="loadButton">    
       <button id="reload-btn" class="browserTool" href="#" onClick="Reload();">&#x21bb;</button>
       <button id="fullscreen-btn" class="browserTool" class="glyphicon glyphicon-fullscreen" href="#" onclick="fullscreenIframe()">&#57664;</button>
-	  <button id="bookmark-btn" class="browserTool" onclick="addBookmark()">&#128214;</button>
+	  <button class="browserTool" style="right: 165px" id="bookmark-btn" onclick="addBookmark()">&#128214;</button>
       <button class="browserTool" style="right:35px;" onclick="goBackwards()">⮌</button>
       <button class="browserTool" style="right:55px" onclick="goForwards()">⮎</button>
       <button class="browserTool" onclick="document.getElementById('mainMenu').style.display = 'block'">&#9776;</button>
@@ -34,6 +34,12 @@
 		<div class="menuOption" onclick="window.open('appelsimpelbrowser.html')">New Tecnophobe Window</div>
         <button id="closeMenu" onclick="document.getElementById('mainMenu').style.display = 'none'">&times;</button>
         </div>
+      <div id="createBookmark">
+        <input id="bookmarkUrl" placeholder="Url" class="bookmarkInput"><br>
+        <input id="bookmarkName" placeholder="Name" class="bookmarkInput"><br>
+        <button class="bookmarkButton">Add Bookmark</button>
+        <button class="bookmarkButton">Cancel</button>
+      </div>
     </div>
    
     <webview id="frame0" class="displayFrame" frameborder="none" onload="doneLoading()">

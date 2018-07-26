@@ -192,3 +192,7 @@ var theWindow = BrowserWindow.getCurrentWindow();
 function closeWindow(){
 	theWindow.close();
 }
+
+function addBookmark(){
+    document.getElementById("createBookmark").display = "block";
+}
