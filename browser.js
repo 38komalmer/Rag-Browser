@@ -15,6 +15,8 @@ var NTpage = localStorage.getItem("ntpage");
 var activeFrame = document.getElementById('frame' + selectedTab);
 //get the stored bookmarks
 var bookmarks = [{name: "Scanu Productions", url: "https://scanurag.com", id: 0}]
+//get the total numbner of bookmarks ever created to ensure that each bookmark has a unique ID
+var totalBookmarks = 0;
 
 //the number of tabs ever opened, tab IDs are based off of this
 var numberOfTabs = 1;
@@ -193,6 +195,23 @@ function closeWindow(){
 	theWindow.close();
 }
 
-function addBookmark(){
-    document.getElementById("createBookmark").display = "block";
+function addBookmark(part){
+    if (part == 1){ 
+        document.getElementById("bookmarkUrl").value = document.getElementById("urlSource").value;
+        document.getElementById("createBookmark").style.display = "block";
+    }
+    if (part == 2){
+        document.getElementById("createBookmark").style.display = "none";
+        var url = document.getElementById("bookmarkUrl").value;
+        var name = document.getElementById("bookmarkName").value;
+        totalBookmarks++;
+        bookmarks.push({name: name, url: url, id: totalBookmarks});
+    }
+}
+
+function scanBookmarks() {
+    for (i=0; i<bookmarks.length; i++){
+        var nBook = documenmt.createElement("a");
+        
+    }
 }
