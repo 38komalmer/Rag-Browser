@@ -146,6 +146,11 @@ function loadUrl() {
     document.getElementById("frame" + selectedTab).src = newUrl;
     console.log("loaded " + newUrl + " on frame " + selectedTab);
 }
+
+function loadBookmark(newLocation) {
+    document.getElementById("urlSource").value = newLocation;
+    loadUrl();
+}
     
 function Reload () {
 var f = document.getElementById('frame' + selectedTab);
@@ -210,8 +215,21 @@ function addBookmark(part){
 }
 
 function scanBookmarks() {
+    //Remove all existing bookmark elements
+    document.getElementById("bookmarksContainer").innerHTML = "";
+    //loop runs for each item in the array bookmarks
     for (i=0; i<bookmarks.length; i++){
-        var nBook = documenmt.createElement("a");
-        
+        //create new element
+        var nBook = document.createElement("a");
+        //assign it a name form the array
+        nBook.innerHTML = bookmarks[i].name;
+        //add the url to the bookmark so that it opens when clicked
+        nBook.setAttribute("onclick", "loadBookmark('" + bookmarks[i].url + "')");
+        //add the bookmark class to the new element
+        nBook.classList.add("bookmarks");
+        //define the container
+        var container = document.getElementById("bookmarksContainer");
+        //add the new element to the container
+        container.appendChild(nBook);
     }
 }

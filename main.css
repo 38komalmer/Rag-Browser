@@ -185,7 +185,7 @@ body{
 
 #mainMenu {
     position: absolute;
-    top: 50px;
+    top: 90px;
     right: 0px;
     background: grey;
     width: 250px;
@@ -214,7 +214,7 @@ body{
     width: 25px;
     height: 25px;
     font-size: 18px;
-    top: 55px;
+    top: 110px;
     background: grey;
     color: white;
 }
@@ -249,4 +249,9 @@ body{
     margin: 5px;
     border: none;
     padding: 5px;
+}
+
+.bookmarks {
+    cursor: pointer;
+    margin-right: 10px;
 }
