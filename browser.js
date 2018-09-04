@@ -211,6 +211,7 @@ function addBookmark(part){
         var name = document.getElementById("bookmarkName").value;
         totalBookmarks++;
         bookmarks.push({name: name, url: url, id: totalBookmarks});
+		scanBookmarks();
     }
 }
 
@@ -233,3 +234,4 @@ function scanBookmarks() {
         container.appendChild(nBook);
     }
 }
+scanBookmarks();
