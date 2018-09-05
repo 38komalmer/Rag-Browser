@@ -14,9 +14,13 @@ var NTpage = localStorage.getItem("ntpage");
 //get the currently active frame
 var activeFrame = document.getElementById('frame' + selectedTab);
 //get the stored bookmarks
-var bookmarks = [{name: "Scanu Productions", url: "https://scanurag.com", id: 0}]
-//get the total numbner of bookmarks ever created to ensure that each bookmark has a unique ID
-var totalBookmarks = 0;
+var bookmarks = JSON.parse(localStorage.getItem("bookmarks"));
+if (bookmarks == null){
+	bookmarks = [{name: "Scanu Productions", url: "http://scanurag.com", id: 1}];
+	console.log("Added Default Bookmarks");
+}
+//get the total number of bookmarks ever created to ensure that each bookmark has a unique ID
+var totalBookmarks = 1;
 
 //the number of tabs ever opened, tab IDs are based off of this
 var numberOfTabs = 1;
@@ -200,6 +204,18 @@ function closeWindow(){
 	theWindow.close();
 }
 
+function maxWindow() {
+	if (!theWindow.isMaximized()) {
+        theWindow.maximize();          
+    } else {
+        theWindow.unmaximize();
+    }
+}
+
+function minWindow() {
+	theWindow.minimize(); 
+}
+
 function addBookmark(part){
     if (part == 1){ 
         document.getElementById("bookmarkUrl").value = document.getElementById("urlSource").value;
@@ -211,6 +227,7 @@ function addBookmark(part){
         var name = document.getElementById("bookmarkName").value;
         totalBookmarks++;
         bookmarks.push({name: name, url: url, id: totalBookmarks});
+		localStorage.setItem("bookmarks", JSON.stringify(bookmarks));
 		scanBookmarks();
     }
 }

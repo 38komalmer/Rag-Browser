@@ -6,9 +6,9 @@
     <body>
         <div class="header" style="-webkit-app-region: drag;">
             <h1 style="display: inline-block;">Bookmarks Manager</h1>
-            <button>Move Bookmark Up</button>
-            <button>Move Bookmark Down</button>
-            <button>Delete Bookmark</button>
+            <button onclick="moveBookmark('up')" style="-webkit-app-region: no-drag;">Move Bookmark Up</button>
+            <button onclick="moveBookmark('down')" style="-webkit-app-region: no-drag;">Move Bookmark Down</button>
+            <button onclick="deleteBookmark()" style="-webkit-app-region: no-drag;">Delete Bookmark</button>
         </div>
         <div id="bookmarksContainer"></div>
         <script src="bookmarks.js"></script>

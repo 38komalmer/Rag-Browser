@@ -29,6 +29,7 @@ body{
 	border: none;
 	padding-top: 0px;
 	z-index: 100;
+	-webkit-app-region: no-drag;
 }
 
 #tabContainer {
@@ -254,4 +255,11 @@ body{
 .bookmarks {
     cursor: pointer;
     margin-right: 10px;
+}
+
+.managerBookmarks {
+	width: 100vw;
+	border-bottom-style: solid;
+	border-bottom-width: thin;
+	padding: 2px;
 }
