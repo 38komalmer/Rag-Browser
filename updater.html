@@ -129,7 +129,6 @@
     }
 }
 		</style>
-		<script src="main.js"></script>
 		<script>
 			var seconds = 11;
 			function countdown(){
@@ -183,9 +182,24 @@
 			}
 			
 			
-			var remote = require('remote'); // Load remote compnent that contains the dialog dependency
-			var dialog = remote.require('dialog'); // Load the dialogs component of the OS
+			var dialog = require('electron').remote; // Load the dialogs component of the OS
 			var fs = require('fs'); // Load the File System to execute our common tasks (CRUD)
+			function deleteFile(filepath){
+                fs.exists(filepath, function(exists) {
+                    if(exists) {
+                        // File exists deletings
+                        fs.unlink(filepath,function(err){
+                            if(err){
+                                alert("An error ocurred updating the file"+ err.message);
+                                console.log(err);
+                                return;
+                            }
+                        });
+                    } else {
+                        alert("This file doesn't exist, cannot delete");
+                    }
+                });
+            }
 		</script>
 	</body>
 </html>
