@@ -16,5 +16,3 @@ function maxWindow() {
 function minWindow() {
 	theWindow.minimize(); 
 }
-
-document.getElementById("versionDisplay").innerHTML = version;

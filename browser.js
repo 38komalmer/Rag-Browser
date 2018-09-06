@@ -251,4 +251,9 @@ function scanBookmarks() {
         container.appendChild(nBook);
     }
 }
+
+window.addEventListener("message", update, false);
+function update(event) {
+	window.location.href = "updater.html";
+}
 scanBookmarks();

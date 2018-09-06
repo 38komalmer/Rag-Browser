@@ -1,0 +1,191 @@
+<html>
+	<head>
+		<title>Rag Browser Updater</title>
+	</head>
+	<body onload="countdown()">
+		<!-- The title Bar -->
+		<div id="title-bar">
+			<h5 id="title">Rag Browser Updater</h5>
+		</div>
+		<button class="titleButtons" style="right: 45px; top: -8px; height: 28px;" onclick="minWindow()">-</button>
+		<button class="titleButtons" style="right:25px; top: -9px; height: 19px;" onclick="maxWindow()">&squ;</button>
+		<button class="titleButtons" style="right: 5px; top: -5px; height: 25px;" onclick="closeWindow()">&times;</button>
+		<div id="card1">
+			<h1>Are you sure you want to update?</h1>
+			<h3>This procedure will erase all settings and bookmarks</h3>
+			<br>
+			<br>
+			<br>
+			<p>Rag Browser will update in <p id="counter">10s</p></p>
+			<br>
+			<br>
+			<br>
+			<button style="border-color: red;" onclick="cancel()">Cancel</button><button style="border-color: green;" onclick="skip()">Continue</button>
+		</div>
+		<div id="card2" style="display: none;">
+			<h1>Rag Browser is updating!</h1>
+			<h3>Please don't close this window or turn off your computer</h3>
+			<br>
+			<br>
+			<br>
+			<h1 id="loading">&#x21bb;</h1>
+		</div>
+		<style>
+#title-bar {
+	-webkit-app-region: drag;
+	background: #3f3f3f;
+	color: white;
+	height: 20px;
+	padding: 0px;
+	text-align: center;
+	z-index: 99;
+}
+
+#title {
+	margin: 0px;
+	padding: 0px;
+}
+
+.titleButtons{
+	position: fixed;
+	font-weight: bolder;
+	color: white;
+	font-size: 24px;
+	background: rgba(0, 0, 0, 0);
+	border: none;
+	padding-top: 0px;
+	z-index: 100;
+	-webkit-app-region: no-drag;
+}
+			
+			body {
+				padding: 0px;
+				margin: 0px;
+				font-family: arial;
+				text-align: center;
+			}
+			
+			button {
+				background: darkgrey;
+				color: #555555;
+				border: none;
+				border-bottom-style: solid;
+				border-width: 5px;
+				margin: 5px;
+				padding: 5px;
+				font-size: 18;
+				transition-duration: .2s;
+			}
+			
+			button:hover {
+				margin-top: 7px;
+				border-width: 3px;
+			}
+			
+			button:active {
+				margin-top: 9px;
+				border-width: 1px;
+			}
+			
+			#loading {
+    width: 100;
+	margin: auto;
+    -webkit-animation-name: spin;
+    -webkit-animation-duration: 600ms;
+    -webkit-animation-iteration-count: infinite;
+    -webkit-animation-timing-function: linear;
+    -moz-animation-name: spin;
+    -moz-animation-duration: 600ms;
+    -moz-animation-iteration-count: infinite;
+    -moz-animation-timing-function: linear;
+    -ms-animation-name: spin;
+    -ms-animation-duration: 600ms;
+    -ms-animation-iteration-count: infinite;
+    -ms-animation-timing-function: linear;
+    
+    animation-name: spin;
+    animation-duration: 600ms;
+    animation-iteration-count: infinite;
+    animation-timing-function: linear;
+}
+@-ms-keyframes spin {
+    from { -ms-transform: rotate(0deg); }
+    to { -ms-transform: rotate(360deg); }
+}
+@-moz-keyframes spin {
+    from { -moz-transform: rotate(0deg); }
+    to { -moz-transform: rotate(360deg); }
+}
+@-webkit-keyframes spin {
+    from { -webkit-transform: rotate(0deg); }
+    to { -webkit-transform: rotate(360deg); }
+}
+@keyframes spin {
+    from {
+        transform:rotate(0deg);
+    }
+    to {
+        transform:rotate(360deg);
+    }
+}
+		</style>
+		<script src="main.js"></script>
+		<script>
+			var seconds = 11;
+			function countdown(){
+				if (seconds > 1) {
+					setTimeout(countdown, 1000);
+				} else {
+					document.getElementById('card1').style.display = "none";
+					document.getElementById('card2').style.display = "block";
+				}
+				seconds--;
+				document.getElementById('counter').innerHTML = seconds + "s";
+			}
+			
+			function skip() {
+				document.getElementById('card1').style.display = "none";
+				document.getElementById('card2').style.display = "block";
+			}
+			
+			function cancel() {
+				window.location.href = "index.html";
+			}
+			
+			var BrowserWindow = require('electron').remote;
+			var theWindow = BrowserWindow.getCurrentWindow();
+
+
+			function closeWindow(){
+				theWindow.close();
+			}
+
+
+			function maxWindow() {
+
+				if (!theWindow.isMaximized()) {
+  
+					theWindow.maximize();          
+ 
+				} else {
+    
+					theWindow.unmaximize();
+ 
+				}
+
+			}
+
+
+			function minWindow() {
+
+				theWindow.minimize(); 
+
+			}
+			
+			
+			var remote = require('remote'); // Load remote compnent that contains the dialog dependency
+			var dialog = remote.require('dialog'); // Load the dialogs component of the OS
+			var fs = require('fs'); // Load the File System to execute our common tasks (CRUD)
+		</script>
+	</body>
+</html>
