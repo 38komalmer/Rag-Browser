@@ -29,6 +29,9 @@
 			<br>
 			<br>
 			<h1 id="loading">&#x21bb;</h1>
+			<br>
+			<br>
+			<div id="logDisplay"></div>
 		</div>
 		<style>
 #title-bar {
@@ -128,6 +131,11 @@
         transform:rotate(360deg);
     }
 }
+			#logDisplay {
+				max-height: 250px;
+				overflow: auto;
+				text-align: left;
+			}
 		</style>
 		<script>
 			var seconds = 11;
@@ -137,6 +145,7 @@
 				} else {
 					document.getElementById('card1').style.display = "none";
 					document.getElementById('card2').style.display = "block";
+					update();
 				}
 				seconds--;
 				document.getElementById('counter').innerHTML = seconds + "s";
@@ -145,6 +154,7 @@
 			function skip() {
 				document.getElementById('card1').style.display = "none";
 				document.getElementById('card2').style.display = "block";
+				addToLog("Preparing To Update");
 			}
 			
 			function cancel() {
@@ -191,15 +201,33 @@
                         fs.unlink(filepath,function(err){
                             if(err){
                                 alert("An error ocurred updating the file"+ err.message);
-                                console.log(err);
+                                addToLog(err);
                                 return;
                             }
                         });
                     } else {
-                        alert("This file doesn't exist, cannot delete");
+                        addToLog("This file doesn't exist, cannot delete");
                     }
                 });
             }
+			
+			function update(){
+				addToLog("Scanning and removing Rag Browser files")
+				fs.readdir(__dirname, (err, dir) => {
+					for (var i = 0, path; path = dir[i]; i++) {
+						if (path != "updater.html"){
+							addToLog("Found " + path);
+						} else {
+							addToLog("Skipping " + path)
+						}
+					}
+				});
+				
+			}
+			
+			function addToLog(text) {
+				document.getElementById('logDisplay').innerHTML = document.getElementById('logDisplay').innerHTML + "<br>" + text;
+			}
 		</script>
 	</body>
 </html>
