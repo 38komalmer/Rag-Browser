@@ -7,8 +7,8 @@ body{
 
 #title-bar {
 	-webkit-app-region: drag;
-	background: #3f3f3f;
-	color: white;
+	background: white;
+	color: black;
 	height: 20px;
 	padding: 0px;
 	text-align: center;
@@ -23,7 +23,7 @@ body{
 .titleButtons{
 	position: fixed;
 	font-weight: bolder;
-	color: white;
+	color: black;
 	font-size: 24px;
 	background: rgba(0, 0, 0, 0);
 	border: none;
@@ -41,8 +41,10 @@ body{
 }
 
 .tab {
-    background-color: grey;
+    background-color: white;
     color: black;
+    border: solid;
+    border-width: thin;
     width: 100px;
     height: 20px;
     text-align: center;
@@ -60,13 +62,15 @@ body{
 }
 
 .activeTab {
-    background-color: darkgrey;
-    transform: scale(1.05);
+    background-color: black;
+    color: white;
+    transform: scale(1.1);
+    border: none;
 }
 
 .header {
-    background-color: #3f3f3f;
-    color: white;
+    background-color: white;
+    color: black;
     -webkit-touch-callout: none; /* iOS Safari */
     -webkit-user-select: none; /* Safari */
      -khtml-user-select: none; /* Konqueror HTML */
@@ -75,7 +79,7 @@ body{
             user-select: none; /* Non-prefixed version, currently
                                   supported by Chrome and Opera */
     cursor: default;
-    height: 70px;
+    height: 90px;
 }
 
 .browserTool {
