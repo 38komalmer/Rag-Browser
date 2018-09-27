@@ -23,7 +23,42 @@
         <input type="radio" name="nt" id="customNT" onchange="setNT()"><label>Use the following website</label><input type="text" id="customURL" onchange="setNT()">
 		<script src="settings.js"></script>
         <h2>Theme</h2>
-        <div id="darktheme"><h3>Dark Theme</h3><div id="darkcontent"><p>Click to choose</p></div></div><div id="lighttheme"><h3>Light Theme</h3><p>Click to choose</p></div>
-        <style></style>
+        <div id="darktheme" onclick="setTheme('dark')"><h3>Dark Theme</h3><div id="darkcontent"><p>Click to choose</p><br><br></div></div><div id="lighttheme" onclick="setTheme('light')"><h3>Light Theme</h3><p>Click to choose</p></div>
+        <style>
+            #darktheme {
+                background: #3f3f3f;
+                display: inline-block;
+                position: relative;
+                bottom: 35px;
+                height: 150px;
+                width: 150px;
+                color: white;
+                margin: 15px;
+                padding: 5px;
+                text-align: center;
+                box-shadow: 5px 10px 5px rgba(0, 0, 0, .5);
+            }
+            
+            #darkcontent {
+                background: white;
+                color: black;
+                height: 95px;
+                width:160px;
+                position: absolute;
+                left: 0px;
+            }
+            
+            #lighttheme {
+                background: white;
+                height: 150px;
+                display: inline-block;
+                width: 150px;
+                color: black;
+                margin: 15px;
+                padding: 5px;
+                text-align: center;
+                box-shadow: 5px 10px 5px rgba(0, 0, 0, .5);
+            }
+        </style>
     </body>
 </html>
