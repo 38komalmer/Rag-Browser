@@ -75,3 +75,11 @@ function maxWindow() {
 function minWindow() {
 	theWindow.minimize(); 
 }
+
+function setTheme(theme) {
+    if (theme == "light") {
+        localStorage.setItem("theme", "light.css");
+    } else {
+        localStorage.setItem("theme", "main.css");
+    }
+}
