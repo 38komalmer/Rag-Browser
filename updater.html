@@ -19,11 +19,10 @@
 		<br>
 		<br>
 		<p>Rag Browser will update in <p id="counter">10s</p>
-		</p>
-		<br>
-		<br>
-		<br>
-		<button style="border-color: red;" onclick="cancel()">Cancel</button><button style="border-color: green;" onclick="skip()">Continue</button>
+			<br>
+			<br>
+			<br>
+			<button style="border-color: red;" onclick="cancel()">Cancel</button><button style="border-color: green;" onclick="skip()">Continue</button>
 	</div>
 	<div id="card2" style="display: none;">
 		<h1>Rag Browser is updating!</h1>
@@ -36,6 +35,17 @@
 		<br>
 		<div id="logDisplay"></div>
 	</div>
+	<div id="card3" style="display: none;">
+		<h1>I need your help!</h1>
+		<br>
+		<br>
+		<p>Please unzip package.zip into the current directory</p>
+		<br>
+		<div id="current"><h2>Right now it looks like:</h2></div>
+		<div id="preview"><h2>When you are done it should look like:</h2></div>
+		<br>
+		<button style="border-color: red;" onclick="cancel()">Cancel</button><button style="border-color: green;" onclick="skip()">Continue</button>
+	</div>
 	<style>
 		#title-bar {
 			-webkit-app-region: drag;
@@ -45,6 +55,9 @@
 			padding: 0px;
 			text-align: center;
 			z-index: 99;
+			position: fixed;
+			top: 0px;
+			width: 100%;
 		}
 
 		#title {
@@ -66,6 +79,7 @@
 
 		body {
 			padding: 0px;
+			padding-top: 20px;
 			margin: 0px;
 			font-family: arial;
 			text-align: center;
@@ -161,6 +175,24 @@
 			text-align: left;
 		}
 
+		#preview {
+			border: solid 5px;
+			width: 45%;
+			float: right;
+			text-align: left;
+		}
+		
+		#current {
+			border: solid 5px;
+			width: 45%;
+			float: left;
+			text-align: left;
+		}
+
+		.fileDisplay {
+			text-align: left;
+		}
+
 	</style>
 	<script>
 		var seconds = 11;
@@ -243,15 +275,24 @@
 				for (var i = 0, path; path = dir[i]; i++) {
 					if (path != "updater.html") {
 						addToLog("Found " + path);
+						addToFilePreview(path);
 					} else {
 						addToLog("Skipping " + path)
 					}
 				}
-				addToLog("Downloading new files")
-				download(file_url, DOWNLOAD_DIR);
-				addToLog("Download complete")
 			});
-
+			addToLog("Downloading new files");
+			download(file_url, DOWNLOAD_DIR);
+			addToLog("Download complete");
+			document.getElementById('card1').style.display = "none";
+			document.getElementById('card2').style.display = "none";
+			document.getElementById('card3').style.display = "block";
+			fs.readdir(__dirname, (err, dir) => {
+				for (var i = 0, path; path = dir[i]; i++) {
+						addFileToCurrent(path);
+				}
+			});
+			require('child_process').exec('start "" "' + __dirname + '"');
 		}
 
 		// Dependencies
@@ -261,7 +302,7 @@
 
 		// App variables
 		var file_url = 'https://scanunicco.github.io/Rag%20Browser/Latest/Latest.zip';
-		var DOWNLOAD_DIR = __dirname;
+		var DOWNLOAD_DIR = __dirname + "\package.zip";
 
 		function download(url, dest) {
 			return new Promise((resolve, reject) => {
@@ -304,6 +345,17 @@
 
 		function addToLog(text) {
 			document.getElementById('logDisplay').innerHTML = document.getElementById('logDisplay').innerHTML + "<br>" + text;
+		}
+		
+		var codeFile = "<img style='width: 20px;' src='data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAGQAAABkCAAAAABVicqIAAAABGdBTUEAALGPC/xhBQAAACBjSFJNAAB6JgAAgIQAAPoAAACA6AAAdTAAAOpgAAA6mAAAF3CculE8AAAAAmJLR0QA/4ePzL8AAAAJcEhZcwAAOpgAADqYAYcnGMIAAAAHdElNRQfiBwkFMQiWPc7YAAABJ0lEQVRo3u3YvwpBYRjH8TelGG0mg1FxEXIVJpPRyh0ct+AKlFkZDMSqjAaDZJAMJhmPDIqc876/c57HyZ/f9wY+vb09vX+Mn0CGSHxkayJVOSSAmBKmyBBQeUVSOawsrrwiBXA3PXwtYgRRZEgaU2RIqwopMqRzhhQh4kOKFIEUMYIocgRQFBC3ooE4FRXEpeggDkUJsStaiFVRQ2yKHmJRFJFwRRMJVWRIY/HcrBioyI/fgMqnBBAz/CqkXwsur4mEVSdChAiRcOQ4wFpJkDn4CPaI3Fo3sUYSJE5EiHwQsuvam2ogronvEHlENm17Iw0kTkSIfBDimpN7EwnyO1eiRJB9D2spQeJEhAgRIkSIEImMZGqyoL96jf4EuYx1OtqQN0UkUlcMO/y0dD8PkwAAACV0RVh0ZGF0ZTpjcmVhdGUAMjAxOC0wNy0wOVQwNTo0OTowOCswMzowMCTG9ogAAAAldEVYdGRhdGU6bW9kaWZ5ADIwMTgtMDctMDlUMDU6NDk6MDgrMDM6MDBVm040AAAAN3RFWHRzb2Z0d2FyZQAvdXNyL2xvY2FsL3NoYXJlL2RvYy9JbWFnZU1hZ2ljay02Ly9pbmRleC5odG1soeBDKwAAABh0RVh0VGh1bWI6OkRvY3VtZW50OjpQYWdlcwAxp/+7LwAAABh0RVh0VGh1bWI6OkltYWdlOjpIZWlnaHQAMTAwf5GrMAAAABd0RVh0VGh1bWI6OkltYWdlOjpXaWR0aAAxMDDsYPttAAAAGXRFWHRUaHVtYjo6TWltZXR5cGUAaW1hZ2UvcG5nP7JWTgAAABd0RVh0VGh1bWI6Ok1UaW1lADE1MzExMDQ1NDg7OITeAAAAEXRFWHRUaHVtYjo6U2l6ZQA2NTFCQgfxkaEAAABadEVYdFRodW1iOjpVUkkAZmlsZTovLy9ob21lL2sva3Jhc21lYzkva3Jhc21lZC1uZXcvcHVibGljX2h0bWwvZm90by9pY29uczgtZG9jdW1lbnQtMTAwLnBuZ1swXe9zLFIAAAAASUVORK5CYII=' />";
+		function addToFilePreview(input) {
+			var newFile = "<span class='fileDisplay'>" + codeFile + input + "</span><br>";
+			document.getElementById("preview").innerHTML += newFile;
+		}
+
+		function addFileToCurrent(input) {
+			var newFile = "<span class='fileDisplay'>" + codeFile + input + "</span><br>";
+			document.getElementById("current").innerHTML += newFile;
 		}
 
 	</script>
