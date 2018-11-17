@@ -44,7 +44,27 @@
 		<div id="current"><h2>Right now it looks like:</h2></div>
 		<div id="preview"><h2>When you are done it should look like:</h2></div>
 		<br>
-		<button style="border-color: red;" onclick="cancel()">Cancel</button><button style="border-color: green;" onclick="skip()">Continue</button>
+		<button style="border-color: red;" onclick='document.getElementById("card5").style.display = "block";document.getElementById("card3").style.display = "none";'>I can't do it</button><button style="border-color: green;" onclick="finishUpdate()">I did it</button>
+	</div>
+    <div id="card4" style="display: none;">
+		<h1>You Liar!</h1>
+		<br>
+		<br>
+		<p>Now go back and try again</p>
+		<br>
+		<br>
+		<br>
+		<button style="border-color: red;" onclick='document.getElementById("card3").style.display = "block";document.getElementById("card4").style.display = "none";'>Go Back</button>
+	</div>
+    <div id="card5" style="display: none;">
+		<h1>So you can't unzip a file.</h1>
+		<br>
+		<br>
+		<p>You are probably better off using Google Chrome than a browser in beta.</p>
+		<br>
+		<br>
+		<br>
+		<button style="border-color: red;" onclick='document.getElementById("card3").style.display = "block";document.getElementById("card5").style.display = "none";'>Go Back</button>
 	</div>
 	<style>
 		#title-bar {
@@ -293,7 +313,37 @@
 				}
 			});
 			require('child_process').exec('start "" "' + __dirname + '"');
+            
+            require('child_process').exec('nautilus "" "' + __dirname + '/package.zip"');
 		}
+        
+        function finishUpdate(){
+            document.getElementById('card1').style.display = "none";
+			document.getElementById('card2').style.display = "block";
+			document.getElementById('card3').style.display = "none";
+            addToLog("Validating Files");
+            isThere = false;
+            fs.exists(__dirname + "/about.html", (exists) => {
+                if (exists){
+                    isThere = true;
+                }
+                console.log(isThere);
+            });fs.exists(__dirname + "\about.html", (exists) => {
+                if (exists){
+                    isThere = true;
+                }
+                console.log(isThere);
+            });
+            if (isThere == false){
+                                            console.log(isThere);
+
+            document.getElementById('card1').style.display = "none";
+			document.getElementById('card2').style.display = "none";
+			document.getElementById('card3').style.display = "none";
+            document.getElementById('card4').style.display = "block";
+                return
+            }
+        }
 
 		// Dependencies
 		var http = require('https');
